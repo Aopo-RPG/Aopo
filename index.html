@@ -8,8 +8,34 @@
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script                                                                              
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAlWy3aiA3g4vIN19tHQQvIYgeCr5KYsUQ",
+    authDomain: "aopo-fbc72.firebaseapp.com",
+    projectId: "aopo-fbc72",
+    storageBucket: "aopo-fbc72.firebasestorage.app",
+    messagingSenderId: "992208374808",
+    appId: "1:992208374808:web:15f44a66b05334d90d076d"
+  };
 
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+</script>
+<script>
+function sendScore(player, score) {
+  firebase.database().ref("players/" + player).set({
+    score: score,
+    time: Date.now()
+  });
+}
+
+function loadScores() {
+  firebase.database().ref("players").on("value", (snapshot) => {
+    console.log(snapshot.val());
+  });
+}
+</script>
 
 </head>
 
@@ -78,3 +104,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
