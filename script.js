@@ -5,24 +5,6 @@ let user = null;
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-function emailLogin() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  auth.signInWithEmailAndPassword(email, password)
-    .catch(() => auth.createUserWithEmailAndPassword(email, password));
-}
-
-auth.onAuthStateChanged(u => {
-  if (u) {
-    user = u;
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("hub").style.display = "block";
-    document.getElementById("userName").innerText = u.email || u.displayName;
-    loadStats();
-    loadChat();
-  }
-});
-
 // XP SYSTEM
 function gainXP(amount) {
   xp += amount;
@@ -154,4 +136,5 @@ function startTyping() {
     alert("Try again!");
   }
 }
+
 
