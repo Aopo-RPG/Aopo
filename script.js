@@ -2,9 +2,6 @@ let xp = 0;
 let level = 1;
 let user = null;
 
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-
 // XP SYSTEM
 function gainXP(amount) {
   xp += amount;
@@ -136,4 +133,5 @@ function startTyping() {
     alert("Try again!");
   }
 }
+
 
