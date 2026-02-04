@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AOPo ULTRA RPG HUB</title>
+
+<link rel="stylesheet" href="style.css" />
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+
+</head>
+
+<body>
+
+<h1>🌌 AOPo ULTRA ONLINE 🌌</h1>
+
+<!-- LOGIN -->
+<div id="loginBox" class="card">
+  <h2>Login</h2>
+  <input id="email" placeholder="Email" />
+  <input id="password" type="password" placeholder="Password" />
+  <button onclick="emailLogin()">Login</button>
+  <button onclick="googleLogin()">Google Login</button>
+</div>
+
+<!-- MAIN HUB -->
+<div id="hub" style="display:none;">
+  <div class="status">
+    👤 <span id="userName"></span> |
+    ⭐ Level: <span id="level">1</span> |
+    ⚡ XP: <span id="xp">0</span>
+  </div>
+
+  <h2>💬 Global Chat</h2>
+  <div id="chatBox"></div>
+  <input id="chatInput" placeholder="Say something..." />
+  <button onclick="sendChat()">Send</button>
+
+  <h2>🎮 Games</h2>
+  <div class="grid">
+
+    <div class="card">
+      🐍 <b>Snake</b><br>
+      <button onclick="startSnake()">Play</button>
+    </div>
+
+    <div class="card">
+      🧠 <b>Memory Cards</b><br>
+      <button onclick="startMemory()">Play</button>
+    </div>
+
+    <div class="card">
+      🎯 <b>Aim Trainer</b><br>
+      <button onclick="startAim()">Play</button>
+    </div>
+
+    <div class="card">
+      🎲 <b>Lucky Wheel</b><br>
+      <button onclick="spinWheel()">Spin</button>
+    </div>
+
+    <div class="card">
+      ⌨️ <b>Typing Speed</b><br>
+      <button onclick="startTyping()">Play</button>
+    </div>
+
+  </div>
+
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+</div>
+
+<div id="levelUpBanner">🎉 LEVEL UP! 🎉</div>
+
+<script src="firebase.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

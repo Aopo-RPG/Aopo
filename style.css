@@ -1,0 +1,66 @@
+body {
+  background: linear-gradient(135deg, #00c6ff, #00ff99);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  text-shadow: 0 0 20px cyan;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin: 20px;
+}
+
+.card {
+  background: rgba(0, 100, 120, 0.9);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 15px cyan;
+}
+
+button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #00ffaa;
+  font-weight: bold;
+}
+
+canvas {
+  background: black;
+  margin-top: 20px;
+  border: 3px solid cyan;
+}
+
+.status {
+  margin: 10px;
+  font-weight: bold;
+}
+
+#chatBox {
+  background: rgba(0,0,0,0.5);
+  height: 120px;
+  overflow-y: auto;
+  margin: 10px;
+  padding: 5px;
+}
+
+#levelUpBanner {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: gold;
+  color: black;
+  padding: 15px 30px;
+  border-radius: 20px;
+  display: none;
+  font-size: 24px;
+  box-shadow: 0 0 20px gold;
+}
