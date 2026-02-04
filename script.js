@@ -5,12 +5,6 @@ let user = null;
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-// LOGIN
-function googleLogin() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
-}
-
 function emailLogin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -160,3 +154,4 @@ function startTyping() {
     alert("Try again!");
   }
 }
+
