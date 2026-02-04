@@ -5,17 +5,6 @@ let user = null;
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-auth.onAuthStateChanged(u => {
-  if (u) {
-    user = u;
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("hub").style.display = "block";
-    document.getElementById("userName").innerText = u.email || u.displayName;
-    loadStats();
-    loadChat();
-  }
-});
-
 // XP SYSTEM
 function gainXP(amount) {
   xp += amount;
@@ -147,3 +136,4 @@ function startTyping() {
     alert("Try again!");
   }
 }
+
