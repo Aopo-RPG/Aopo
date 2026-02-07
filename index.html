@@ -23,5 +23,37 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script src="script.js"></script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAlWy3aiA3g4vIN19tHQQvIYgeCr5KYsUQ",
+  authDomain: "aopo-fbc72.firebaseapp.com",
+  projectId: "aopo-fbc72",
+  storageBucket: "aopo-fbc72.firebasestorage.app",
+  messagingSenderId: "992208374808",
+  appId: "1:992208374808:web:15f44a66b05334d90d076d",
+  measurementId: "G-YS6J69YFEC"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  signInAnonymously(auth)
+    .then(() => {
+      console.log("🔥 AOPO ONLINE: Anonymous login success");
+    })
+    .catch((error) => {
+      console.error("❌ Firebase error:", error);
+    });
+
+  // make db global for later games
+  window.aopoDB = db;
+</script>
 </body>
 </html>
+
