@@ -1,33 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>AOPO</title>
+  <meta charset="UTF-8">
+  <title>AoPo RPG</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>🔥 AOPO 🔥</h1>
+  <h1>🔥 AoPo RPG 🔥</h1>
 
-<div id="chat">
-  <input id="msg" placeholder="Type message">
-  <button onclick="sendMsg()">Send</button>
-  <div id="messages"></div>
-</div>
+  <button id="loginBtn">Play Online</button>
+  <p id="status">Not connected</p>
 
-<button onclick="rollDice()">🎲 Roll Dice</button>
-<p id="diceResult"></p>
+  <!-- 🔥 FIREBASE SDKs (MUST be before your JS) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<script src="script.js"></script>
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
+  <!-- 🔑 FIREBASE CONFIG (YOU paste keys here) -->
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAlWy3aiA3g4vIN19tHQQvIYgeCr5KYsUQ",
@@ -39,21 +32,17 @@ const firebaseConfig = {
   measurementId: "G-YS6J69YFEC"
 };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+    firebase.initializeApp(firebaseConfig);
 
-  signInAnonymously(auth)
-    .then(() => {
-      console.log("🔥 AOPO ONLINE: Anonymous login success");
-    })
-    .catch((error) => {
-      console.error("❌ Firebase error:", error);
-    });
+    // make firebase available to script.js
+    window.auth = firebase.auth();
+    window.db = firebase.firestore();
 
-  // make db global for later games
-  window.aopoDB = db;
-</script>
+    console.log("🔥 Firebase connected");
+  </script>
+
+  <!-- 🎮 YOUR GAME JS (LAST always) -->
+  <script src="script.js"></script>
+
 </body>
 </html>
-
