@@ -2,47 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AoPo RPG</title>
+  <title>🔥 AoPo RPG 🔥</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 
 <body>
-
   <h1>🔥 AoPo RPG 🔥</h1>
 
-  <button id="loginBtn">Play Online</button>
-  <p id="status">Not connected</p>
+  <button id="signinBtn">Sign In</button>
+  <button id="logoutBtn">Log Out</button>
 
-  <!-- 🔥 FIREBASE SDKs (MUST be before your JS) -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <p id="status">Not connected ❌</p>
 
-  <!-- 🔑 FIREBASE CONFIG (YOU paste keys here) -->
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAlWy3aiA3g4vIN19tHQQvIYgeCr5KYsUQ",
-  authDomain: "aopo-fbc72.firebaseapp.com",
-  projectId: "aopo-fbc72",
-  storageBucket: "aopo-fbc72.firebasestorage.app",
-  messagingSenderId: "992208374808",
-  appId: "1:992208374808:web:15f44a66b05334d90d076d",
-  measurementId: "G-YS6J69YFEC"
-};
-
-    firebase.initializeApp(firebaseConfig);
-
-    // make firebase available to script.js
-    window.auth = firebase.auth();
-    window.db = firebase.firestore();
-
-    console.log("🔥 Firebase connected");
-  </script>
-
-  <!-- 🎮 YOUR GAME JS (LAST always) -->
+  <!-- JS MUST BE LAST -->
   <script src="script.js"></script>
-
 </body>
 </html>
