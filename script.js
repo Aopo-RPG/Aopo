@@ -1,9 +1,9 @@
 // 🔥 Firebase config (PUT YOUR OWN KEYS)
 const firebaseConfig = {
-  apiKey: "PUT_API_KEY_HERE",
-  authDomain: "PUT_AUTH_DOMAIN",
-  projectId: "PUT_PROJECT_ID",
-  appId: "PUT_APP_ID"
+  apiKey: "AIzaSyAlWy3aiA3g4vIN19tHQQvIYgeCr5KYsUQ",
+  authDomain: "aopo-fbc72.firebaseapp.com",
+  projectId: "aopo-fbc72",
+  appId: "1:992208374808:web:15f44a66b05334d90d076d"
 };
 
 // Initialize Firebase
@@ -33,3 +33,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
