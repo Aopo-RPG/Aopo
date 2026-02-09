@@ -1,19 +1,25 @@
 body {
-  background: #0f172a;
+  background: #0b1020;
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
+  padding-top: 60px;
 }
 
 button {
   padding: 12px 20px;
   font-size: 16px;
-  background: orange;
-  border: none;
-  border-radius: 8px;
+  margin: 10px;
   cursor: pointer;
+  border-radius: 8px;
+  border: none;
 }
 
-button:hover {
-  background: gold;
+#signinBtn {
+  background: orange;
+}
+
+#logoutBtn {
+  background: crimson;
+  color: white;
 }
