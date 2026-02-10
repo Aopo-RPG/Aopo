@@ -1,25 +1,47 @@
 body {
-  background: #0b1020;
-  color: white;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#00c6ff,#00ff99);
+  font-family: Arial;
   text-align: center;
-  padding-top: 60px;
+  padding: 20px;
+}
+
+h1 {
+  color: white;
+  text-shadow: 0 0 10px cyan;
 }
 
 button {
-  padding: 12px 20px;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
+  padding: 10px 16px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-#signinBtn {
-  background: orange;
+#gameArea {
+  display: none;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
 }
 
-#logoutBtn {
-  background: crimson;
+.card {
+  background: rgba(0,0,0,0.6);
   color: white;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+#levelUp {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: gold;
+  padding: 20px 40px;
+  font-size: 24px;
+  border-radius: 20px;
+  z-index: 1000;
 }
