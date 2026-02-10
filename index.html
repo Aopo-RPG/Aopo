@@ -3,24 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>AoPo RPG</title>
-
   <link rel="stylesheet" href="style.css">
 
-  <!-- Firebase SDKs (MUST be before script.js) -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 
 <body>
 
-  <h1>🔥 AoPo RPG 🔥</h1>
+<h1>🔥 AoPo RPG Hub 🔥</h1>
 
-  <button id="signinBtn">Sign In</button>
-  <button id="logoutBtn">Log Out</button>
+<button id="signinBtn">Sign In</button>
+<button id="logoutBtn">Log Out</button>
+<p id="status">Checking login...</p>
 
-  <p id="status">Checking login...</p>
+<!-- LEVEL POPUP -->
+<div id="levelUp">🎉 LEVEL UP! 🎉</div>
 
-  <!-- JS MUST be LAST -->
-  <script src="script.js"></script>
+<!-- GAME HUB -->
+<div id="gameArea">
+
+  <div class="card">
+    <h3>🎯 Reaction Game</h3>
+    <button onclick="reactionGame()">Click FAST</button>
+    <p id="reactionResult"></p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 Memory Game</h3>
+    <button onclick="memoryGame()">Start</button>
+    <p id="memoryResult"></p>
+  </div>
+
+  <div class="card">
+    <h3>🎲 Dice Game</h3>
+    <button onclick="diceGame()">Roll Dice</button>
+    <p id="diceResult"></p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
