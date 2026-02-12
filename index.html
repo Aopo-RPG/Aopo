@@ -1,106 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>AoPo RPG Hub</title>
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
 <style>
-body{
-  font-family: Arial, sans-serif;
-  text-align:center;
-  background:#eaf6ff;
-}
-
-h1{margin-top:20px}
-
-button{
-  padding:10px 16px;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
-  margin:5px;
-  font-weight:bold;
-}
-
-.card{
-  background:white;
-  padding:15px;
-  border-radius:16px;
-  width:260px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
-}
-
-#gameArea{
-  display:none;
-  margin-top:20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;
-  padding:20px;
-}
-
-/* XP BAR */
-#xpWrap{
-  width:320px;
-  height:18px;
-  background:#003;
-  border-radius:10px;
-  margin:10px auto;
-  overflow:hidden;
-}
-
-#xpBar{
-  height:100%;
-  width:0%;
-  background:gold;
-  transition:.3s;
-}
-
-#xpText{font-weight:bold}
-
-/* LEVEL POPUP */
-#levelUp{
-  display:none;
-  position:fixed;
-  top:40%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:gold;
-  padding:20px 40px;
-  border-radius:20px;
-  font-size:26px;
-  z-index:999;
-}
-
-/* CONFETTI */
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg); opacity:0}
-}
-
-/* MEMORY FLIP */
-#memGrid{
-  display:grid;
-  grid-template-columns:repeat(4,50px);
-  gap:8px;
-  justify-content:center;
-}
-
-.memCard{
-  width:50px;
-  height:50px;
-  background:#2d6cdf;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:10px;
-  font-size:22px;
-  cursor:pointer;
-}
+body{font-family:Arial;text-align:center;background:#eaf6ff}
+button{padding:10px 16px;border-radius:10px;border:none;margin:5px;cursor:pointer;font-weight:bold}
+.card{background:white;padding:15px;border-radius:16px;width:260px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+#gameArea{display:none;margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;padding:20px}
+#xpWrap{width:320px;height:18px;background:#003;border-radius:10px;margin:10px auto;overflow:hidden}
+#xpBar{height:100%;width:0%;background:gold;transition:.3s}
+#levelUp{display:none;position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);
+background:gold;padding:20px 40px;border-radius:20px;font-size:26px;z-index:999}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+#memGrid{display:grid;grid-template-columns:repeat(4,50px);gap:8px;justify-content:center}
+.memCard{width:50px;height:50px;background:#2d6cdf;color:white;display:flex;
+align-items:center;justify-content:center;border-radius:10px;font-size:22px;cursor:pointer}
 </style>
 </head>
 
@@ -109,168 +28,139 @@ button{
 <h1>🔥 AoPo RPG Hub 🔥</h1>
 
 <button id="signinBtn">Sign In</button>
-<button id="logoutBtn">Log Out</button>
 <p id="status">Checking login...</p>
 
-<!-- XP -->
 <div id="xpWrap"><div id="xpBar"></div></div>
 <div id="xpText">Level 1 — XP 0/10</div>
 
-<!-- LEVEL POPUP -->
 <div id="levelUp">🎉 LEVEL UP! 🎉</div>
 
-<!-- GAME HUB -->
 <div id="gameArea">
 
-  <div class="card">
-    <h3>🎯 Reaction Game</h3>
-    <button onclick="reactionGame()">Click FAST</button>
-    <p id="reactionResult"></p>
-  </div>
+<div class="card">
+<h3>🎯 Reaction</h3>
+<button onclick="reactionGame()">Test</button>
+<p id="reactionOut"></p>
+</div>
 
-  <div class="card">
-    <h3>🎲 Dice Game</h3>
-    <button onclick="diceGame()">Roll Dice</button>
-    <p id="diceResult"></p>
-  </div>
+<div class="card">
+<h3>🎲 Dice</h3>
+<button onclick="diceGame()">Roll</button>
+<p id="diceOut"></p>
+</div>
 
-  <div class="card">
-    <h3>🧠 Memory Flip</h3>
-    <div id="memGrid"></div>
-  </div>
+<div class="card">
+<h3>🔢 Guess</h3>
+<button onclick="guessGame()">Play</button>
+</div>
+
+<div class="card">
+<h3>🧠 Memory Flip</h3>
+<div id="memGrid"></div>
+</div>
 
 </div>
 
 <script>
-// 🔥 PASTE YOUR FIREBASE CONFIG BELOW
+// 🔥 PASTE YOUR FIREBASE CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyAlWy3aiA3g4vIN19tHQQvIYgeCr5KYsUQ",
   authDomain: "aopo-fbc72.firebaseapp.com",
   projectId: "aopo-fbc72",
+  appId: "1:992208374808:web:15f44a66b05334d90d076d",
 };
-
 firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+const auth=firebase.auth();
 
-// AUTH BUTTONS
-signinBtn.onclick = () => auth.signInAnonymously();
-logoutBtn.onclick = () => auth.signOut();
+signinBtn.onclick=()=>auth.signInAnonymously();
 
-auth.onAuthStateChanged(user=>{
-  if(user){
-    status.innerText = "Signed in ✅";
-    gameArea.style.display = "grid";
-    signinBtn.style.display="none";
-  } else {
-    status.innerText = "Signed out";
-    gameArea.style.display = "none";
-    signinBtn.style.display="inline-block";
-  }
+auth.onAuthStateChanged(u=>{
+ if(u){
+  status.innerText="Signed in ✅";
+  signinBtn.style.display="none";
+  gameArea.style.display="grid";
+ } else {
+  status.innerText="Not signed in";
+ }
 });
 
 // XP SYSTEM
 let xp=0, level=1;
 function gainXP(n){
-  xp+=n;
-  if(xp>=10){ xp=0; level++; levelUp(); }
-  xpBar.style.width=(xp*10)+"%";
-  xpText.innerText=`Level ${level} — XP ${xp}/10`;
+ xp+=n;
+ if(xp>=10){xp=0;level++;showLevel();}
+ xpBar.style.width=(xp*10)+"%";
+ xpText.innerText=`Level ${level} — XP ${xp}/10`;
 }
 
-function levelUp(){
-  levelUpBox();
-  confetti();
-}
-
-function levelUpBox(){
-  levelUp.style.display="block";
-  setTimeout(()=>levelUp.style.display="none",5000);
+function showLevel(){
+ levelUp.style.display="block";
+ confetti();
+ setTimeout(()=>levelUp.style.display="none",5000);
 }
 
 function confetti(){
-  for(let i=0;i<60;i++){
-    let d=document.createElement("div");
-    d.style.position="fixed";
-    d.style.left=Math.random()*100+"%";
-    d.style.top="-10px";
-    d.style.width="6px";
-    d.style.height="6px";
-    d.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    d.style.animation="fall 2s linear forwards";
-    document.body.appendChild(d);
-    setTimeout(()=>d.remove(),2000);
-  }
-}
-
-// EXTRA MINI GAMES
-function guessGame(){
-  const n = Math.floor(Math.random()*5)+1;
-  const g = prompt("Guess number 1-5");
-  if(+g===n){ alert("Correct!"); gainXP(2);} else alert("It was "+n);
-}
-
-function clickCountGame(){
-  let c=0;
-  const end = Date.now()+3000;
-  const handler=()=>{
-    c++;
-    if(Date.now()>end){
-      document.removeEventListener("click",handler);
-      alert("Clicks: "+c);
-      gainXP(Math.min(3,Math.floor(c/5)));
-    }
-  };
-  document.addEventListener("click",handler);
+ for(let i=0;i<60;i++){
+  let d=document.createElement("div");
+  d.style.position="fixed";
+  d.style.left=Math.random()*100+"%";
+  d.style.top="-10px";
+  d.style.width="6px";
+  d.style.height="6px";
+  d.style.background=`hsl(${Math.random()*360},100%,50%)`;
+  d.style.animation="fall 2s linear forwards";
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),2000);
+ }
 }
 
 // GAMES
 function reactionGame(){
-  const t = Math.floor(Math.random()*300)+100;
-  reactionResult.innerText = "Time: "+t+" ms";
-  gainXP(2);
+ let t=Math.floor(Math.random()*300)+100;
+ reactionOut.innerText="Time "+t+" ms";
+ gainXP(2);
 }
 
 function diceGame(){
-  const r = Math.floor(Math.random()*6)+1;
-  diceResult.innerText = "You rolled "+r;
-  gainXP(1);
+ let r=Math.floor(Math.random()*6)+1;
+ diceOut.innerText="Rolled "+r;
+ gainXP(1);
 }
 
-// MEMORY FLIP (auto reset + reshuffle after finished)
+function guessGame(){
+ let n=Math.floor(Math.random()*5)+1;
+ let g=prompt("Guess 1-5");
+ if(+g===n){alert("Correct");gainXP(3);}
+ else alert("It was "+n);
+}
+
+// MEMORY GAME AUTO RESET
 function buildMemory(){
-  memGrid.innerHTML = "";
-  const icons=["🍎","🍎","⚽","⚽","🚀","🚀","🎮","🎮"].sort(()=>Math.random()-0.5);
-  let first=null, matches=0;
+ memGrid.innerHTML="";
+ const icons=["🍎","🍎","⚽","⚽","🚀","🚀","🎮","🎮"].sort(()=>Math.random()-0.5);
+ let first=null, matches=0;
 
-  icons.forEach(v=>{
-    let c=document.createElement("div");
-    c.className="memCard";
-    c.innerText="?";
-    c.onclick=()=>{
-      if(c.innerText!=="?") return;
-      c.innerText=v;
-      if(!first){first=c;return;}
-      if(first.innerText===c.innerText){
-        matches++;
-        gainXP(2);
-        first=null;
-        if(matches===4){
-          setTimeout(()=>{
-            buildMemory(); // reshuffle new board
-          },800);
-        }
-      } else {
-        setTimeout(()=>{c.innerText="?";first.innerText="?"},600);
-        first=null;
-      }
-    };
-    memGrid.appendChild(c);
-  });
+ icons.forEach(v=>{
+  let c=document.createElement("div");
+  c.className="memCard";
+  c.innerText="?";
+  c.onclick=()=>{
+   if(c.innerText!=="?") return;
+   c.innerText=v;
+   if(!first){first=c;return;}
+   if(first.innerText===c.innerText){
+    matches++; gainXP(2); first=null;
+    if(matches===4) setTimeout(buildMemory,800);
+   } else {
+    setTimeout(()=>{c.innerText="?";first.innerText="?"},600);
+    first=null;
+   }
+  };
+  memGrid.appendChild(c);
+ });
 }
-
 buildMemory();
-
 </script>
+
 </body>
 </html>
-
